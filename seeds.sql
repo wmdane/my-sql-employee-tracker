@@ -11,10 +11,10 @@ VALUES ('Manager', 140000.00, 1),
  ('Lawyer', 125000.00, 7),
 
  INSERT INTO employee (first_name, last_name, role_id, manager_id)
- VALUES ('Will', 'Dane', 1),
+ VALUES ('Will', 'Dane', 1, null),
  ('Jon', 'Smith', 2, 1),
  ('Sarah', 'Marshall', 3, 2),
- ('Carmen', 'San Diego', 4),
+ ('Carmen', 'San Diego', 4, null),
  ('Lara', 'Croft', 5, 1),
- ('John', 'Wick', 6),
+ ('John', 'Wick', 6, null),
  ('Alfred', 'Hitchcock', 7, 6);
