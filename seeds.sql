@@ -7,8 +7,8 @@ VALUES ('Manager', 140000.00, 1),
  ('Salesperson', 66000.00, 3),
  ('Engineer', 85000.00, 4),
  ('Accountant', 92000.00, 5),
- ('Legal Team Lead', 138000,00, 6);
- ('Lawyer', 125000.00, 7),
+ ('Legal Team Lead', 138000.00, 6),
+ ('Lawyer', 125000.00, 7);
 
  INSERT INTO employee (first_name, last_name, role_id, manager_id)
  VALUES ('Will', 'Dane', 1, null),
