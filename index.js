@@ -33,9 +33,7 @@ function runSearch() {
         "View department",
         "View role",
         "View employee",
-        "Update department",
-        "Update role",
-        "Update employee",
+        "Update employee roll",
         "Exit",
       ],
     })
@@ -59,13 +57,7 @@ function runSearch() {
         case "View employee":
           viewEmployee();
           break;
-        case "Update department":
-          updateDepartment();
-          break;
-        case "Update role":
-          updateRole();
-          break;
-        case "Update employee":
+        case "Update employee roll":
           updateEmployee();
           break;
         case "Exit":
@@ -173,4 +165,25 @@ function addEmployee() {
         }
       );
     });
+}
+function viewDepartment() {
+  connection.query("SELECT * FROM department", function (err, response) {
+    if (err) throw err;
+    console.table(response);
+    runSearch();
+  });
+}
+function viewRole() {
+  connection.query("SELECT * FROM role", function (err, response) {
+    if (err) throw err;
+    console.table(response);
+    runSearch();
+  });
+}
+function viewEmployee() {
+  connection.query("SELECT * FROM employee", function (err, response) {
+    if (err) throw err;
+    console.table(response);
+    runSearch();
+  });
 }
