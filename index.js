@@ -4,13 +4,10 @@ var inquirer = require("inquirer");
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
   port: 3306,
 
-  // Your username
   user: "root",
 
-  // Your password
   password: "",
   database: "employee_tracker_db",
 });
@@ -20,6 +17,7 @@ connection.connect(function (err) {
   runSearch();
 });
 
+//ask what the user would like to do
 function runSearch() {
   inquirer
     .prompt({
@@ -37,6 +35,7 @@ function runSearch() {
         "Exit",
       ],
     })
+    //switch cases for each inquirer answer
     .then(function (answer) {
       switch (answer.action) {
         case "Add department":
@@ -67,6 +66,7 @@ function runSearch() {
     });
 }
 
+//Define the functions listed out above
 function addDepartment() {
   inquirer
     .prompt([
@@ -129,38 +129,38 @@ function addEmployee() {
   inquirer
     .prompt([
       {
-        name: "firstName",
+        name: "first_name",
         type: "input",
         message: "What is the employee's first name?",
       },
       {
-        name: "lastName",
+        name: "last_name",
         type: "input",
         message: "What is the employee's last name?",
       },
       {
-        name: "roleId",
+        name: "role_id",
         type: "input",
         message: "What is the employee's role ID?",
       },
       {
-        name: "managerId",
+        name: "manager_id",
         type: "input",
         message: "What is the ID of this employee's manager?",
       },
     ])
     .then(function (answer) {
       connection.query(
-        "INSERT INTO department SET ?",
+        "INSERT INTO employee SET ?",
         {
-          first_name: answer.firstName,
-          last_name: answer.lastName,
-          role_id: answer.roleId,
-          manager_id: answer.managerId,
+          first_name: answer.first_name,
+          last_name: answer.last_name,
+          role_id: answer.role_id,
+          manager_id: answer.manager_id,
         },
         function (err) {
           if (err) throw err;
-          console.log("Department added!");
+          console.log("Employee added!");
           runSearch();
         }
       );
@@ -186,4 +186,45 @@ function viewEmployee() {
     console.table(response);
     runSearch();
   });
+}
+
+//BROKEN DO NOT USE
+function updateEmployee() {
+  connection.query("SELECT * FROM employee", function (err, response) {
+    if (err) throw err;
+    console.table(response);
+    inquirer.prompt([
+      {
+        name: "whichEmp",
+        type: "input",
+        message: "Please enter the ID of the employee who's role you'd like to change.",
+      },
+    ]);
+  });
+  connection
+    .query("SELECT id FROM employee WHERE ?", { whichEmp: answer.whichEmp }, function (err) {
+      if (err) throw err;
+      inquirer.prompt([
+        {
+          name: "newRole",
+          type: "input",
+          message: "What role ID would you like to give this employee",
+        },
+      ]);
+    })
+    .then(function (answer) {
+      connection.query(
+        "UPDATE employee SET ? WHERE ?",
+        [
+          {
+            role_id: answer.role_id,
+          },
+        ],
+        function (err) {
+          if (err) throw err;
+          console.table(answer);
+          runSearch();
+        }
+      );
+    });
 }

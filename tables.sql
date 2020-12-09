@@ -4,6 +4,7 @@ CREATE DATABASE employee_tracker_db;
 
 USE employee_tracker_db;
 
+-- Create tables to be filled
 CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(30)  NULL,

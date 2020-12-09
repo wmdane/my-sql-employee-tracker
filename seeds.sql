@@ -1,6 +1,8 @@
+-- Populate department table
 INSERT INTO department (name)
 VALUES  ('Legal'), ('Sales'), ('Finance'), ('Engineering');
 
+-- Populate role table
 INSERT INTO role (title, salary, department_id)
 VALUES ('Manager', 140000.00, 1),
  ('Sales Lead', 76000.00, 2),
@@ -10,6 +12,7 @@ VALUES ('Manager', 140000.00, 1),
  ('Legal Team Lead', 138000.00, 6),
  ('Lawyer', 125000.00, 7);
 
+-- Populate employee table
  INSERT INTO employee (first_name, last_name, role_id, manager_id)
  VALUES ('Will', 'Dane', 1, null),
  ('Jon', 'Smith', 2, 1),
